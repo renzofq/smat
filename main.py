@@ -3,11 +3,7 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 import models
 from database import engine, get_db
-# ==========================================================
-# CRITICAL: CREACIÓN DE LA BASE DE DATOS Y TABLAS
-# Esta línea busca el archivo 'smat.db' y crea las tablas
-# definidas en models.py si es que aún no existen.
-# ==========================================================
+
 models.Base.metadata.create_all(bind=engine)
 app = FastAPI(title="SMAT Persistente")
 # Esquemas de validación (Pydantic)
@@ -40,4 +36,3 @@ async def registrar_lectura(lectura: LecturaCreate, db: Session = Depends(get_db
     db.add(nueva_lectura)
     db.commit()
     return {"status": "Lectura guardada en DB"}
-#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 tokengithub
